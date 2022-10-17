@@ -151,6 +151,21 @@ const generateHeader = () => {
     })
 }
 
+
+
+const addMember = () => {
+    inquirer.prompt(teamMemberQuestions).then((answers) => {
+        if (answers.role === 'Engineer') {
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+            generateEngineer(engineer);
+        } else {
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+            generateIntern(intern);
+        }
+        newMember();
+    })
+}
+
 const newMember = () => {
     inquirer.createPromptModule([{
         type: 'confirm',
