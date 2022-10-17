@@ -143,7 +143,7 @@ const generateHeader = () => {
     </header>
     <main class="container d-flex col justify-content-center">
         <div class="row">`
-    fs.writeFile('./dist/myteam.html', pageStart, (err) => err ? console.log(err) : '')
+    fs.writeFile('./dist/myteam.html', htmlStart, (err) => err ? console.log(err) : '')
     inquirer.createPromptModule(managerQuestions).then((answers) => {
         const manager = new Manager(answers.name, answers.id, answers.email, answers.phone)
         generateManager(manager);
