@@ -151,7 +151,53 @@ const generateHeader = () => {
     })
 }
 
+const generateManager = (manager) => {
+    const managerHtml =
+    `<section class="card p-3 m-3 shadow bg-white">
+        <div class="card-header bg-primary text-white">
+            <h2>John Doe</h2>
+            <h3>${manager.getName()}</h3>
+        </div>
+        <ul class="card-body list-group-flush">
+            <li class="list-group-item">ID: ${manager.getId()}</li>
+            <li class="list-group-item">Email: <a href="${manager.getEmail()}">${manager.getEmail()}</a></li>
+            <li class="list-group-item">Phone Number: ${manager.getPhone()}</li>
+        </ul>
+    </section>`
+    fs.appendFile('./dist/myteam.html', managerHtml, (err) => err ? console.log(err) : '')
+}
 
+const generateEngineer = (engineer) => {
+    const engineerHtml =
+    `<section class="card p-3 m-3 shadow bg-white">
+        <div class="card-header bg-primary text-white">
+            <h2>Jane Doe</h2>
+            <h3>${engineer.getName()}</h3>
+        </div>
+        <ul class="card-body list-group-flush">
+            <li class="list-group-item">ID: ${engineer.getId()}</li>
+            <li class="list-group-item">Email: <a href="${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+            <li class="list-group-item">Vist employee GitHub<a href="${engineer.getGitHub()}">here</a></li>
+        </ul>
+    </section>`
+    fs.appendFile('./dist/myteam.html', engineerHtml, (err) => err ? console.log(err) : '')
+}
+
+const generateIntern = (intern) => {
+    const internHtml =
+    `<section class="card p-3 m-3 shadow bg-white">
+        <div class="card-header bg-primary text-white">
+            <h2>John Doe</h2>
+            <h3>${intern.getName()}</h3>
+        </div>
+        <ul class="card-body list-group-flush">
+            <li class="list-group-item">ID: ${intern.getId()}</li>
+            <li class="list-group-item">Email: <a href="${intern.getEmail()}">${intern.getEmail()}</a></li>
+            <li class="list-group-item">School: ${intern.getSchool()}</li>
+        </ul>
+    </section>`
+    fs.appendFile('./dist/myteam.html', internHtml, (err) => err ? console.log(err) : '')
+}
 
 const addMember = () => {
     inquirer.prompt(teamMemberQuestions).then((answers) => {
