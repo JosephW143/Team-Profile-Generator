@@ -125,3 +125,51 @@ const teamMemberQuestions = [
         when: (answers) => answers.role === 'Intern'
     }
 ]
+
+const generateHeader = () => {
+    const htmlStart =
+    `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+        <title>My Team</title>
+    </head>
+    <header class="p-6 text-center text-white bg-danger">
+        <h1 class="display-4 p-5">My Team</h1>
+    </header>
+    <main class="container d-flex col justify-content-center">
+        <div class="row">`
+    fs.writeFile('./dist/myteam.html', pageStart, (err) => err ? console.log(err) : '')
+    inquirer.createPromptModule(managerQuestions).then((answers) => {
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.phone)
+        generateManager(manager);
+        newMember();
+    })
+}
+
+const newMember = () => {
+    inquirer.createPromptModule([{
+        type: 'confirm',
+        name: 'newMember',
+        message: "Would you like to add a new team member?",
+        default: true
+    }]).then((answer) => {
+        if (answer.newMember) {
+            addMember();
+        } else {
+            console.log("Your team's profile has been generated!");
+            const htmlEnd =
+            `   </div>
+    
+            </main>
+            </html>`
+            fs.appendFile('./dist/myteam.html', htmlEnd, (err) => err ? console.log(err) : '')
+        }
+    })
+}
+
+generateHeader();
