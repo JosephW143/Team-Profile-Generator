@@ -43,10 +43,10 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        name: 'phone',
+        name: 'number',
         message: "What is the phone number of your team manager?",
-        validate: phoneInput => {
-            if (phoneInput) {
+        validate: numberInput => {
+            if (numberInput) {
                 return true;
             } else {
                 console.log("Please enter the team manager's phone number!")
@@ -144,8 +144,8 @@ const generateHeader = () => {
     <main class="container d-flex col justify-content-center">
         <div class="row">`
     fs.writeFile('./dist/myteam.html', htmlStart, (err) => err ? console.log(err) : '')
-    inquirer.createPromptModule(managerQuestions).then((answers) => {
-        const manager = new Manager(answers.name, answers.id, answers.email, answers.phone)
+    inquirer.prompt(managerQuestions).then((answers) => {
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.number)
         generateManager(manager);
         newMember();
     })
@@ -155,13 +155,13 @@ const generateManager = (manager) => {
     const managerHtml =
     `<section class="card p-3 m-3 shadow bg-white">
         <div class="card-header bg-primary text-white">
-            <h2>John Doe</h2>
-            <h3>${manager.getName()}</h3>
+            <h2>${manager.getName()}</h2>
+            <h3>${manager.getRole()}</h3>
         </div>
         <ul class="card-body list-group-flush">
             <li class="list-group-item">ID: ${manager.getId()}</li>
             <li class="list-group-item">Email: <a href="${manager.getEmail()}">${manager.getEmail()}</a></li>
-            <li class="list-group-item">Phone Number: ${manager.getPhone()}</li>
+            <li class="list-group-item">Phone Number: ${manager.getNumber()}</li>
         </ul>
     </section>`
     fs.appendFile('./dist/myteam.html', managerHtml, (err) => err ? console.log(err) : '')
@@ -171,8 +171,8 @@ const generateEngineer = (engineer) => {
     const engineerHtml =
     `<section class="card p-3 m-3 shadow bg-white">
         <div class="card-header bg-primary text-white">
-            <h2>Jane Doe</h2>
-            <h3>${engineer.getName()}</h3>
+            <h2>${engineer.getName()}</h2>
+            <h3>${engineer.getRole()}</h3>
         </div>
         <ul class="card-body list-group-flush">
             <li class="list-group-item">ID: ${engineer.getId()}</li>
@@ -187,8 +187,8 @@ const generateIntern = (intern) => {
     const internHtml =
     `<section class="card p-3 m-3 shadow bg-white">
         <div class="card-header bg-primary text-white">
-            <h2>John Doe</h2>
-            <h3>${intern.getName()}</h3>
+            <h2>${intern.getName()}</h2>
+            <h3>${intern.getRole()}</h3>
         </div>
         <ul class="card-body list-group-flush">
             <li class="list-group-item">ID: ${intern.getId()}</li>
@@ -213,7 +213,7 @@ const addMember = () => {
 }
 
 const newMember = () => {
-    inquirer.createPromptModule([{
+    inquirer.prompt([{
         type: 'confirm',
         name: 'newMember',
         message: "Would you like to add a new team member?",
