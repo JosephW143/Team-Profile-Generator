@@ -7,5 +7,5 @@ test('checks for Manager methods', () => {
     expect(manager.getName()).toBe('Dave');
     expect(manager.getId()).toBe('01');
     expect(manager.getEmail()).toBe('placeholder@email.com');
-    expect(manager.officeNumber()).toBe('(123)-456-7890')
+    expect(manager.getNumber()).toBe('(123)-456-7890')
 });

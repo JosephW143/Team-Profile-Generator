@@ -177,7 +177,7 @@ const generateEngineer = (engineer) => {
         <ul class="card-body list-group-flush">
             <li class="list-group-item">ID: ${engineer.getId()}</li>
             <li class="list-group-item">Email: <a href="${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-            <li class="list-group-item">Vist employee GitHub<a href="${engineer.getGitHub()}">here</a></li>
+            <li class="list-group-item">Vist employee GitHub<a href="github.com/${engineer.getGitHub()}">here</a></li>
         </ul>
     </section>`
     fs.appendFile('./dist/myteam.html', engineerHtml, (err) => err ? console.log(err) : '')
